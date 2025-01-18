@@ -96,7 +96,6 @@ print(
     6:Sair
     """
 )
-tigger = 0
 while True:
     try:
         tigger = int(input("Escolha umas das Opções acima:"))
