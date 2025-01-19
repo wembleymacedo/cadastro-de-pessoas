@@ -48,15 +48,60 @@ from datetime import date
 dia_atual = date.today()     # variavel contendo o dia atual
 
 
-
+#*Solicite o nome e a idade do usuário.
+#*Armazene essas informações como um dicionário em uma lista.
 
 
 #----------------------------------------------------------Bloco das Funções------------------------------------------------------------------------
 
-
+lista_dados_usuarios = []
 def adicionar_usuario():
-    """adiciona usuario a uma lista """""               # -> DOC STR
-    pass
+    """adiciona usuario a uma lista """""
+    while True:
+        try:
+            # Solicitando e validando o nome do usuário
+            nome = str(input("Digite seu Nome: "))
+            if nome.isnumeric():
+                raise ValueError()
+            dict_geral = {"nome":nome}
+            lista_dados_usuarios.append(dict_geral)
+            break
+
+         #  O Metodo de string isnumerica pergunta se o valor armazenado tem so letras armazenado
+        #  caso tenha ele grava o valor em um dicionario e quebra o loop com o break e vai
+        # para o codigo de baixo.
+
+
+        except ValueError:
+            print(20 * "-", "Tente novamente !", 20 * "-")
+            print("Numeros nao sao valores aceitos como nome!")
+            continue  # Reinicia o loop
+    while True:
+        try:
+            # Solicitando e validando a idade do usuário
+            idade = int(input("Sua idade: "))
+            if idade > 0:
+                dict_geral = {"idade": idade}
+                lista_dados_usuarios.append(dict_geral)
+            else:
+                print("Somente numeros positivos sao aceitos")
+                continue
+        except ValueError:
+            print(20 * "-", "Pfv, Tente Novamente!", 20 * "-")
+            print("Somente numeros sao aceitos como idade.")
+            continue
+        break
+
+#--------------------------------------------------------------------------------------------------------------------------------------------------'''
+ # acessando chaves e valores adicionados na lista com loop for e
+# Metodo items() que  retorna o valor e chave do dicionario dentro da lista
+    print(50 * "=")
+    for dicionario in lista_dados_usuarios:
+        for dict_nome,dict_idade in dicionario.items():                                                                #
+            print(f"{dict_nome}:{dict_idade}")
+
+    print("Adicionado com sucesso")
+
 
 def listar_usuario():
     """Busca todos usuarios da lista """""
@@ -75,6 +120,7 @@ def remover_usuario():
     def remove_todos():
         """Remova todos os usuarios de uma so vez """
         pass
+    pass
 
 def sair():
     """Finalizar a execucao"""
@@ -105,7 +151,7 @@ while True:
             print("Escolha um numero entre 1 e 6 ")
 
 
-    except:
+    except ValueError:
         print(7*"-","Erro ao digitar  -_-",7*"-")
         print("Desculpe ! Letras,Simbolos e Numeros Reais nao são aceitos na operação")
         print("----------------------------------------------------------")
@@ -115,6 +161,8 @@ while True:
 if tigger == 1:
     print("Adicionar Usuario")
     adicionar_usuario()
+
+
 elif tigger == 2:
     print("Listar Usuario")
     listar_usuario()
