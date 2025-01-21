@@ -13,30 +13,30 @@ O programa deve exibir um menu com as seguintes opções:
 6:Sair
 
 
-2:Adicionar Usuário:
+1:Adicionar Usuário:
 
 *Solicite o nome e a idade do usuário.
 *Armazene essas informações como um dicionário em uma lista.
 
-3:Listar Usuários:
+2:Listar Usuários:
 
 *Exiba todos os usuários cadastrados.
 *Buscar Usuário por Nome:
 
-4:Peça ao usuário um nome para busca.
+3:Peça ao usuário um nome para busca.
 *Use um loop para verificar se o nome está na lista.
 *Se encontrado, exiba as informações do usuário.
 
-5:Calcular Média de Idades:
+4:Calcular Média de Idades:
 *Use um loop para somar todas as idades e calcule a média.
 *Exiba o resultado.
 
-6:Remover Usuário:
+5:Remover Usuário:
 
 *Solicite o nome do usuário a ser removido.
 *Use um loop para encontrar e remover o usuário da lista.
 
-7:Sair:
+6:Sair:
 
 *Finalize o programa.
 """
@@ -91,21 +91,33 @@ def adicionar_usuario():
             print("Somente numeros sao aceitos como idade.")
             continue
         break
-
-#--------------------------------------------------------------------------------------------------------------------------------------------------'''
- # acessando chaves e valores adicionados na lista com loop for e
-# Metodo items() que  retorna o valor e chave do dicionario dentro da lista
-    print(50 * "=")
-    for dicionario in lista_dados_usuarios:
-        for dict_nome,dict_idade in dicionario.items():                                                                #
-            print(f"{dict_nome}:{dict_idade}")
-
     print("Adicionado com sucesso")
+
+
+
+
 
 
 def listar_usuario():
     """Busca todos usuarios da lista """""
-    pass
+    for dicionario in lista_dados_usuarios:
+        for dict_nome, dict_idade in dicionario.items():  #
+            print(f"{dict_nome}:{dict_idade}")
+def busca_nome():
+    print(40*"=")
+    tigger_busca = str(input("Escreva o nome que deseja buscar:"))
+    for dicionario in lista_dados_usuarios:
+        for dict_nome in dicionario.values():
+            if str(dict_nome) in tigger_busca:
+                print("Usuario encontrado")
+            else:
+                print(40 * "=")
+                print("Usuario nao encotrado")
+
+
+
+
+
 
 def buscar_usuario():
     """Busca um usuario especifico da lista"""
@@ -126,60 +138,87 @@ def sair():
     """Finalizar a execucao"""
     pass
 
+def menu_geral():
+    print(3*""
+            
+          "")
+    print(25*"-_-","MENU DE OPÇÕES",25*"-_-")
+
+    print(
+        """
+        1 :Adicionar usuário
+        2:Listar usuários
+        3:Buscar usuário por nome
+        4:Calcular média de idades
+        5:Remover usuário
+        6:Sair
+        """
+    )
+    while True:
+        try:
+            tigger = int(input("Escolha umas das Opções acima:"))
+            if tigger <= 0 or tigger <= 7:
+                break
+            else:
+                print("Escolha um numero entre 1 e 6 ")
+
+
+        except ValueError:
+            print(7*"-","Erro ao digitar  -_-",7*"-")
+            print("Desculpe ! Letras,Simbolos e Numeros Reais nao são aceitos na operação")
+            print("----------------------------------------------------------")
+            print(5*"->","Tente Novamente!",5*"<-")
+
+
+    if tigger == 1:
+        print("Adicionar Usuario")
+        print(40*"=")
+        adicionar_usuario()
+        while True:
+            print('[1] - CADASTRAR UM NOVO USUARIO:'
+                  '[0] - VOLTAR:')
+            continuar_cadastrando = int(input("Escolha uma das opções:"))
+            if continuar_cadastrando == 1:
+                adicionar_usuario()
+            elif continuar_cadastrando == 0:
+                menu_geral()
+
+
+    elif tigger == 2:
+        print("Listar Usuario")
+        print(40*"=")
+        while True:
+            print('[1] Listar usuarios cadastrados:'
+                  '[2] Buscar usuario por nome:'
+                  '[0] Voltar:')
+            continuar_buscando = int(input("Escolha uma das opcoes:"))
+            if continuar_buscando == 1:
+                listar_usuario()
+            elif continuar_buscando == 2:
+                busca_nome()
+            elif continuar_buscando == 0:
+                menu_geral()
+
+
+
+
+    elif tigger == 3:
+        print("Buscar usuario")
+        buscar_usuario()
+    elif tigger == 4:
+        print("Calcular media")
+        calcular_media_idade()
+    elif tigger == 5:
+        print("Remover usuario")
+        remover_usuario()
+    elif tigger == 6:
+        print("Sair do programa")
+
 #------------------------------------------------------ Body Code-----------------------------------------------------------------------------
-print(3*""
-        
-      "")
-print(25*"-_-","MENU DE OPÇÕES",25*"-_-")
 
-print(
-    """
-    1 :Adicionar usuário
-    2:Listar usuários
-    3:Buscar usuário por nome
-    4:Calcular média de idades
-    5:Remover usuário
-    6:Sair
-    """
-)
-while True:
-    try:
-        tigger = int(input("Escolha umas das Opções acima:"))
-        if tigger <= 0 or tigger <= 7:
-            break
-        else:
-            print("Escolha um numero entre 1 e 6 ")
+#------------------------------------------------------ O CODIGO COMECA A SER EXECUTADO DESTE BLOCO
 
-
-    except ValueError:
-        print(7*"-","Erro ao digitar  -_-",7*"-")
-        print("Desculpe ! Letras,Simbolos e Numeros Reais nao são aceitos na operação")
-        print("----------------------------------------------------------")
-        print(5*"->","Tente Novamente!",5*"<-")
-
-
-if tigger == 1:
-    print("Adicionar Usuario")
-    adicionar_usuario()
-
-
-elif tigger == 2:
-    print("Listar Usuario")
-    listar_usuario()
-elif tigger == 3:
-    print("Buscar usuario")
-    buscar_usuario()
-elif tigger == 4:
-    print("Calcular media")
-    calcular_media_idade()
-elif tigger == 5:
-    print("Remover usuario")
-    remover_usuario()
-elif tigger == 6:
-    print("Sair do programa")
-
-
-
+menu_geral()
 
 
 
