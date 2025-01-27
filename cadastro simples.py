@@ -28,7 +28,7 @@ O programa deve exibir um menu com as seguintes opções:
 *Se encontrado, exiba as informações do usuário.
 
 5:Calcular Média de Idades:
-*Use um loop para somar todas as idades e calcule a média.
+*Use um looeeeep para somar todas as idades e calcule a média.
 *Exiba o resultado.
 
 6:Remover Usuário:
