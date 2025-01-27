@@ -57,40 +57,17 @@ dia_atual = date.today()     # variavel contendo o dia atual
 lista_dados_usuarios = []
 def adicionar_usuario():
     """adiciona usuario a uma lista """""
-    while True:
-        try:
-            # Solicitando e validando o nome do usuário
-            nome = str(input("Digite seu Nome: "))
-            if nome.isnumeric():
-                raise ValueError()
-            dict_geral = {"nome":nome}
-            lista_dados_usuarios.append(dict_geral)
-            break
+    nome = input("Digite seu nome:")
+    nome_valido = trata_strs(nome)                      # Funcao ja esta tratando entrada digitada pelo usuario
+    idade = input("Digite sua idade:")
+    idade_valida = trata_int(idade)                      # Funcao ja esta tratando entrada digitada pelo usuario
 
-         #  O Metodo de string isnumerica pergunta se o valor armazenado tem so letras armazenado
-        #  caso tenha ele grava o valor em um dicionario e quebra o loop com o break e vai
-        # para o codigo de baixo.
+    dict_geral = {"nome":nome_valido,"idade":idade_valida}        #Adiciona entrada digitada pelo usuario detreww de um dicionario
+    lista_dados_usuarios.append(dict_geral)         #Adiciona o dicionanario dentro de um lista
 
 
-        except ValueError:
-            print(20 * "-", "Tente novamente !", 20 * "-")
-            print("Numeros nao sao valores aceitos como nome!")
-            continue  # Reinicia o loop
-    while True:
-        try:
-            # Solicitando e validando a idade do usuário
-            idade = int(input("Sua idade: "))
-            if idade > 0:
-                dict_geral = {"idade": idade}
-                lista_dados_usuarios.append(dict_geral)
-            else:
-                print("Somente numeros positivos sao aceitos")
-                continue
-        except ValueError:
-            print(20 * "-", "Pfv, Tente Novamente!", 20 * "-")
-            print("Somente numeros sao aceitos como idade.")
-            continue
-        break
+
+
     print("Adicionado com sucesso")
 
 
@@ -101,22 +78,29 @@ def adicionar_usuario():
 def listar_usuario():
     """Busca todos usuarios da lista """""
     for dicionario in lista_dados_usuarios:
-        for dict_nome, dict_idade in dicionario.items():  #
+        for dict_nome, dict_idade in dicionario.items():
             print(f"{dict_nome}:{dict_idade}")
+    print(20 * "---")
+
+
 def busca_nome():
-    print(40*"=")
-    tigger_busca = str(input("Escreva o nome que deseja buscar:"))
+    print(40 * "=")
+    tigger_busca = str(input("Escreva o nome que deseja buscar:")).lower()  # Converte a entrada para minúsculas
+    usuario_encontrado = False  # Variável para controlar se o nome foi encontrado
+
+    # Itera sobre a lista de usuários
     for dicionario in lista_dados_usuarios:
         for dict_nome in dicionario.values():
-            if str(dict_nome) in tigger_busca:
-                print("Usuario encontrado")
-            else:
-                print(40 * "=")
-                print("Usuario nao encotrado")
+            if str(dict_nome).lower() == tigger_busca:
+                print("Usuário encontrado")
+                usuario_encontrado = True
+                break  # Sai do loop assim que encontrar o nome
+        if usuario_encontrado:
+            break  # Sai do loop externo se o nome foi encontrado
 
 
-
-
+    if not usuario_encontrado:
+        print("Usuário não encontrado")
 
 
 def buscar_usuario():
@@ -175,7 +159,7 @@ def menu_geral():
         print(40*"=")
         adicionar_usuario()
         while True:
-            print('[1] - CADASTRAR UM NOVO USUARIO:'
+            print('[1] - CADASTRAR UM NOVO USUARIO:'  
                   '[0] - VOLTAR:')
             continuar_cadastrando = int(input("Escolha uma das opções:"))
             if continuar_cadastrando == 1:
@@ -214,11 +198,45 @@ def menu_geral():
     elif tigger == 6:
         print("Sair do programa")
 
+def trata_int(ints):
+    while True:
+        try:
+            # Solicitando e validando a idade do usuário
+            entrada = int(ints)
+            if entrada < 0:
+                print("Somente numeros positivos sao aceitos")
+                ints = input("Por favor, insira novamente a idade: ")  # Pede uma nova entrada
+                continue  # Reinicia o loop com a nova entrada
+            return entrada
+        except ValueError:
+            print(20 * "-", "Por favor, tente novamente!", 20 * "-")
+            ints = input("Idade inválida. Por favor, insira um número válido: ")  # Solicita nova entrada
+
+
+def trata_strs(strs):
+    while True:
+        try:
+            nome = strs.strip()  # Remove espaços em branco antes e depois do nome
+            if not nome.isalpha() or nome == "":  # Verifica se o nome contém apenas letras e não está vazio
+                raise ValueError("Nome inválido. Números e espaços não são permitidos.")
+            return nome  # Retorna o nome validado
+        except ValueError as e:
+            print(20 * "-", "Tente novamente!", 20 * "-")
+            print(e)  # Exibe a mensagem de erro gerada
+            strs2 = input("Nome inválido. Por favor, insira um nome: ")  # Solicita nova entrada
+            return strs2
+
+
+
+
+
+
 #------------------------------------------------------ Body Code-----------------------------------------------------------------------------
 
 #------------------------------------------------------ O CODIGO COMECA A SER EXECUTADO DESTE BLOCO
 
 menu_geral()
+
 
 
 
