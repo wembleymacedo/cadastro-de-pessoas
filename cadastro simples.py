@@ -223,7 +223,7 @@ def trata_strs(strs):
         except ValueError as e:
             print(20 * "-", "Tente novamente!", 20 * "-")
             print(e)  # Exibe a mensagem de erro gerada
-            strs2 = input("Nome inválido. Por favor, insira um nome: ")  # Solicita nova entrada
+            strs = input("Nome inválido. Por favor, insira um nome: ")  # Solicita nova entrada
             return strs2
 
 
